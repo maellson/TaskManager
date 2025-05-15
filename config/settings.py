@@ -30,11 +30,13 @@ SECRET_KEY = "django-insecure-ts1#rl_e6urw)7i&jvqo@ojupyj4cn0nw%fl+wnl7ra*a^*whi
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Configuração CORS
 CORS_ALLOW_ALL_ORIGINS = True  # Em produção, especifique as origens permitidas
 
+
+CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
 
@@ -48,9 +50,10 @@ INSTALLED_APPS = [
 
     # Apps de terceiros
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
 
-    
+
     # Apps do projeto
     'users.apps.UsersConfig',
     'core.apps.CoreConfig',
@@ -66,13 +69,17 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
+        #'rest_framework.authentication.BasicAuthentication',  # apagar depois
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
+        #'rest_framework.permissions.AllowAny',  # Temporariamente para teste
+
     ],
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",

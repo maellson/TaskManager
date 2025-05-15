@@ -1,0 +1,28 @@
+1- passo 
+# Criar e ativar ambiente virtual
+python -m venv task_venv
+source task_venv/bin/activate  # ou venv\Scripts\activate no Windows
+
+# Criar o arquivo requirements.txt
+echo "django==5.0.1
+djangorestframework==3.14.0
+django-cors-headers==4.3.1" > requirements.txt
+
+# Instalar dependências
+pip install -r requirements.txt
+
+
+2- passo 
+
+# Criar projeto Django
+django-admin startproject config .
+
+# Criar os apps
+python manage.py startapp core
+python manage.py startapp api
+python manage.py startapp users
+
+# Criar diretórios necessários em core/
+mkdir -p core/models core/services
+touch core/models/__init__.py core/models/process.py core/models/task.py core/models/rule.py
+touch core/services/__init__.py core/services/task_service.py core/services/process_service.py

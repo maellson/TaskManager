@@ -14,8 +14,8 @@ class ProcessViewSet(viewsets.ModelViewSet):
     queryset = Process.objects.all()
     serializer_class = ProcessSerializer
 
-    # permission_classes = [permissions.IsAuthenticated]
-    permission_classes = [permissions.AllowAny]#liberado apenas para testes. hsbilitei pra ver o flow funcionando
+    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.AllowAny]#liberado apenas para testes. hsbilitei pra ver o
 
     @action(detail=True, methods=['get'])
     def critical_path(self, request, pk=None):
@@ -64,7 +64,7 @@ class ProcessViewSet(viewsets.ModelViewSet):
                 'id': str(task.id),
                 'type': 'taskNode',  # Tipo personalizado que criaremos no React
                 # Posição baseada na ordem
-                'position': {'x': i * 250, 'y': task.order * 100},
+                'position': {'x': task.order * 50, 'y': i * 20},
                 'data': {
                     'id': task.id,
                     'name': task.name,
